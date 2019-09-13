@@ -1,0 +1,9 @@
+{
+    "name": "weare/dmidecode",
+    "description": "DMIDecode php-wrapper",
+    "type": "project",
+    "require": {},
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+    }
+}
