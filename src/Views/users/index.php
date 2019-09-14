@@ -27,6 +27,10 @@ $title = 'Список пользователей';
                     <a href="/users/view?id=<?= $user->id; ?>">
                         Проссмотр
                     </a>
+
+                    <a href="/users/delete?id=<?= $user->id; ?>" onclick="return confirm('Вы уверены, что хотите удалить запись ?');">
+                        Удалить
+                    </a>
                 </td>
             </tr>
         <?php endforeach; ?>
