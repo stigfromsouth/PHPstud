@@ -25,7 +25,11 @@ $title = 'Список пользователей';
                 <td><?= $user->email; ?></td>
                 <td>
                     <a href="/users/view?id=<?= $user->id; ?>">
-                        Проссмотр
+                        Просмотр
+                    </a>
+
+                    <a href="/users/update?id=<?= $user->id; ?>">
+                        Редактировать
                     </a>
 
                     <a href="/users/delete?id=<?= $user->id; ?>" onclick="return confirm('Вы уверены, что хотите удалить запись ?');">
@@ -35,6 +39,9 @@ $title = 'Список пользователей';
             </tr>
         <?php endforeach; ?>
     </table>
+    <a href="/users/create">
+        Создать пользователя
+    </a>
 
 </body>
 </html>

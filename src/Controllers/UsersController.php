@@ -3,6 +3,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Services\UsersService;
 use App\System\Base\Controller;
 
@@ -48,6 +49,48 @@ class UsersController extends Controller
                 'user' => $item]);
     }
 
+    public function actionCreate()
+    {
+        $user = new User();
+        if ($this->isRequestMethodPost()) {
+            $user->name = $_POST['name'];
+            $user->email = $_POST['email'];
+            try {
+                $this->usersService->create($user);
+                $this->redirect('/users/index');
+            } catch (\Exception $exception) {
+
+            }
+        }
+        return $this->render('users/EditForm', [
+                'title' => 'Создание пользователя',
+                'user' => $user,
+            ]);
+    }
+    public function actionUpdate()
+    {
+        $id = $this->getId();
+        $user = $this->usersService->findById($id);
+        if ($user === NULL) {
+            return "ID с таким номером отсутствует !";
+        }
+
+        if ($this->isRequestMethodPost()) {
+            $user->name = $_POST['name'];
+            $user->email = $_POST['email'];
+            try {
+                $this->usersService->create($user);
+                $this->redirect('/users/index');
+            } catch (\Exception $exception) {
+
+            }
+        }
+        return $this->render('users/EditForm', [
+            'title' => 'Редактирование пользователя ' . $user->name,
+            'user' => $user,
+        ]);
+    }
+
     /**
      * Удаление пользователя
      * @throws \Exception
@@ -59,6 +102,14 @@ class UsersController extends Controller
         echo(count($this->usersService->getList())). '<br>';
         $this->usersService->delete($item);
         echo(count($this->usersService->getList()));
+    }
+
+    /**
+     * Проверка редиректа
+     */
+    public function actionRedirect()
+    {
+        return $this->redirect('/users/index');
     }
 
     /**

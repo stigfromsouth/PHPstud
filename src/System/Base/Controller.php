@@ -14,4 +14,15 @@ abstract class Controller
         extract($params);
         return include VIEWS_PATH . "{$viewName}.php";
     }
+
+    protected function redirect(string $route)
+    {
+        $destination = 'Location: ' . 'http://study.local' . $route;
+        return header($destination);
+    }
+
+    protected function isRequestMethodPost() : bool
+    {
+        return $_SERVER['REQUEST_METHOD'] === 'POST';
+    }
 }
