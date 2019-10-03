@@ -38,16 +38,16 @@ class User
     /**
      * Конструктор.
      *
-     * @param int $id
-     * @param string $name
-     * @param string $email
+     * @param int|null $id
+     * @param string|null $name
+     * @param string|null $email
      * @param string|null $passwordHash
      * @param bool $isActive
      */
     public function __construct(
-        int $id,
-        string $name,
-        string $email,
+        int $id = null,
+        string $name = null,
+        string $email = null,
         string $passwordHash = null,
         bool $isActive = true
     ) {
