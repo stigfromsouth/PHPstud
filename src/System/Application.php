@@ -3,6 +3,8 @@
 
 namespace App\System;
 
+include 'vendor/autoload.php';
+
 define('BASE_PATH', dirname(__DIR__));
 
 define('VIEWS_PATH', BASE_PATH . '/Views/');
@@ -13,6 +15,8 @@ class Application
 
     public function run()
     {
+        $pdo = new \PDO('sqlite:data/phpstud.db');
+        \ActiveRecord::setDb($pdo);
         print_r($this->handleRoute());
     }
 

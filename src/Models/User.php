@@ -3,58 +3,23 @@
 
 namespace App\Models;
 
-use http\Exception\BadQueryStringException;
+use ActiveRecord;
 
 /**
  * Модель пользователя
+ *
+ * @property INT $id идентификатор пользователя
+ * @property string $name имя пользователя
+ * @property string $email почтовый адрес
+ * @property string $password_hash хэш пароля пользователя
+ * @property boolean $is_active признак активности пользователя
  */
-class User
+class User extends ActiveRecord
 {
-    /**
-     * @var int идентификатор
-     */
-    public $id;
+    public $table = 'user';
+    public $primaryKey = 'id';
 
-    /**
-     * @var string Имя
-     */
-    public $name;
-
-    /**
-     * @var string Почтовый адрес
-     */
-    public $email;
-
-    /**
-     * @var string Зашифрованный пароль
-     */
-    public $passwordHash;
-
-    /**
-     * @var boolean Признак активности
-     */
-    public $isActive;
-
-    /**
-     * Конструктор.
-     *
-     * @param int|null $id
-     * @param string|null $name
-     * @param string|null $email
-     * @param string|null $passwordHash
-     * @param bool $isActive
-     */
-    public function __construct(
-        int $id = null,
-        string $name = null,
-        string $email = null,
-        string $passwordHash = null,
-        bool $isActive = true
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->passwordHash = $passwordHash;
-        $this->isActive = $isActive;
-    }
+    public $relations = [
+        'posts' => [self::HAS_MANY, Post::class, 'user_id']
+    ];
 }

@@ -3,25 +3,21 @@
 
 namespace App\Models;
 
-use DateTime;
+use ActiveRecord;
 
 /**
  * Модель профиля пользователя
+ *
+ * @property INT @user_id идентификатор пользователя
+ * @property string $theme пользовательская тема
+ * @property string default Null $last_auth последняя авторизация
  */
-class Profile
+class Profile extends ActiveRecord
 {
-    /**
-     * @var int Идентификатор пользователя
-     */
-    public $userId;
+    public $table = 'profile';
+    public $primaryKey = 'user_id';
 
-    /**
-     * @var string Наименование темы
-     */
-    public $theme;
-
-    /**
-     * @var DateTime Время последнего логина
-     */
-    public $lastAuthAt;
+    public $relations = [
+        'user' => [self::HAS_ONE, User::class, 'id'],
+    ];
 }

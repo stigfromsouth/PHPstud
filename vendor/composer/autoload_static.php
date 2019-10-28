@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit6d6e6aa69cc1d040bd17e065d609ebf8
 {
+    public static $files = array (
+        'd1f573e03feb57b0a500cc7be57520b4' => __DIR__ . '/..' . '/bephp/activerecord/ActiveRecord.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
