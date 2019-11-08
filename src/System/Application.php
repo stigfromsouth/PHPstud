@@ -3,19 +3,20 @@
 
 namespace App\System;
 
-include 'vendor/autoload.php';
-
 define('BASE_PATH', dirname(__DIR__));
 
 define('VIEWS_PATH', BASE_PATH . '/Views/');
 
+define('DB_PATH', BASE_PATH . '/data/');
+
+include '../vendor/autoload.php';
 class Application
 {
     const CONTROLLERS_DIR = 'App\\Controllers\\';
 
     public function run()
     {
-        $pdo = new \PDO('sqlite:data/phpstud.db');
+        $pdo = new \PDO('sqlite:/var/www/PHPStud/data/phpstud.db');
         \ActiveRecord::setDb($pdo);
         print_r($this->handleRoute());
     }
@@ -53,7 +54,6 @@ class Application
 
         return $exec;
     }
-
 
     /**
      * Преобразование в кэмел кесй строки разделённой дефисами.

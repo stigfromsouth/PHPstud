@@ -9,26 +9,8 @@ use App\Models\User;
  * Сервис управления пользователями.
  * @package App\Services
  */
-class UsersService
+class UsersService extends User
 {
-    /**
-     * @var User[]
-     */
-    private $list;
-
-    public function __construct()
-    {
-        $this->list = [
-            new User(1, 'Alexey', 'alexey@gmail.com'),
-            new User(2, 'John', 'John@gmail.com'),
-            new User(3, 'Phil', 'Phil@gmail.com'),
-            new User(4, 'Sonya', 'Sonya@gmail.com'),
-            new User(5, 'Vasiliy', 'Vasiliy@gmail.com'),
-            new User(6, 'Judy', 'Judy@gmail.com'),
-            new User(7, 'Den', 'Den@gmail.com'),
-        ];
-    }
-
     /**
      * Создание пользователя
      * @param User $user
@@ -37,61 +19,50 @@ class UsersService
      */
     public function create(User $user): void
     {
-        $this->list[] = $user;
+        $this->insert();
     }
 
     /**
      * Возвращает пользователя по ID
      * @param integer $id
-     * @return User|null
+     * @return ActiveRecord|User|bool|null
      */
-    public function findById($id): ?User
+    public function findById($id)
     {
-        foreach ($this->list as $item) {
-            if ($id == $item->id) {
-                return $item;
-            }
-        }
-        return null;
+        $user = new User();
+        return $user->find($id);
     }
 
     /**
      * Возвращает пользователя по email
      * @param string $email
-     * @return User|null
+     * @return ActiveRecord|User|bool|null
      */
-    public function findByEmail($email): ?User
+    public function findByEmail(string $email): ?User
     {
-        foreach ($this->list as $item) {
-            if ($email == $item->email) {
-                return $item;
-            }
-        }
-        return null;
+        $user = new User();
+        return $user->eq('email', $email)->find();
     }
 
     /**
      * Изменение пользователя
      * @param User $user
-     * @return void
-     * @throws \Exception
+     * @return boolean|ActiveRecord
      */
-    public function update(User $user): void
+    public function update(User $user):bool
     {
-        $key = $this->findKey($user);
-        $this->list[$key] = $user;
+        $user->update();
     }
 
     /**
      * Удаление пользователя
      * @param User $user
-     * @return void
+     * @return ActiveRecord|boolean
      * @throws \Exception
      */
-    public function delete(User $user): void
+    public function delete(User $user):bool
     {
-        $key = $this->findKey($user);
-        unset($this->list[$key]);
+        $user->delete();
     }
 
     /**
@@ -100,22 +71,7 @@ class UsersService
      */
     public function getList(): array
     {
-        return $this->list;
+        $user = new User();
+        return $user->findAll();
     }
-
-    /**
-     * Возвращает идентификатор запрошенного объекта
-     * @param User $user
-     * @return int
-     * @throws \Exception
-     */
-    public function findKey(User $user): int
-    {
-        $key = array_search($user, $this->list);
-        if ($key === false) {
-            throw new \Exception("Пользователь не найден !");
-        }
-        return $key;
-    }
-
 }

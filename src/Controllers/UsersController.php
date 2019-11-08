@@ -30,6 +30,8 @@ class UsersController extends Controller
 
     public function actionIndex()
     {
+        //echo '<pre>';
+        //print_r(BASE_PATH);
         return $this->render('users/index', [
             'list' => $this->usersService->getList(),
         ]);
@@ -37,8 +39,7 @@ class UsersController extends Controller
 
     public function actionView()
     {
-        $id = $this->getId();
-
+        $id = $_GET['id'];
         $item = $this->usersService->findById($id);
 
         if (!$item) {
