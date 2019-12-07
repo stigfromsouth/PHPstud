@@ -20,8 +20,8 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name market-planner.local;
-    root /var/www/app/frontend/web;
+    server_name ${PROJ}.local;
+    root /var/www/${PROJ}/frontend/web;
     index index.php index.html index.htm;
 
     location / {
@@ -58,8 +58,8 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name admin.market-planner.local;
-    root /var/www/app/backend/web;
+    server_name admin.${PROJ}.local;
+    root /var/www/${PROJ}/backend/web;
     index index.php index.html index.htm;
 
     location / {
