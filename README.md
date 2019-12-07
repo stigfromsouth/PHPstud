@@ -9,3 +9,6 @@ docker-compose up -d nginx php-fpm workspace # запуск созданных �
 docker-compose exec workspace bash           # запуск коммандной строки в контейнере
 su laradock                              
 ```
+#### Create Yii2 project advanced
+mkdir ${PROJ} && cd ${PROJ}
+composer create-project --prefer-dist yiisoft/yii2-app-advanced .
