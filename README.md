@@ -10,7 +10,7 @@ docker-compose exec workspace bash           # запуск коммандной
 su laradock                              
 ```
 #### Create Yii2 project advanced
-mkdir ${PROJ} && cd ${PROJ}
+mkdir ${PROJ} && cd ${PROJ} &&
 composer create-project --prefer-dist yiisoft/yii2-app-advanced .
 
 #### Nginx config for Yii2 advanced
