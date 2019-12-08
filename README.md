@@ -14,10 +14,11 @@ mkdir ${PROJ} && cd ${PROJ} &&
 composer create-project --prefer-dist yiisoft/yii2-app-advanced .
 
 #### DB connection for Yii2 advanced
+```
 files:
     ${PROJ}/common/config/main-local.php
     ${PROJ}/environments/dev/common/config/main-local.php
-```
+
 'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=mysql;port=3306;dbname=database',
